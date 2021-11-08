@@ -24,5 +24,7 @@ def load_corpus_in_dataframe():
     ids = open(tweetdir+'tweets-ids').readlines()
     dict = {}
     for id in ids:
-        dict[id] = load_tweet_with_annotation(id)
+        temp = load_tweet_with_annotation(id)
+        if temp != "No annotations":
+            dict[id] = temp
     return pd.DataFrame.from_dict(dict)
