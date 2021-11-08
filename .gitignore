@@ -7,3 +7,5 @@ foo.txt
 !foo.html
 # Ignorer les objets et les archives
 *.[oa]
+# Ignore vscode directory
+.vscode
