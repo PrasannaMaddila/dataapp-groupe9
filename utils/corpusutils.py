@@ -173,11 +173,16 @@ def test_load_tweet_with_annotation():
 def load_corpus_in_dataframe():
     ids = open(datadir+'tweets-ids').readlines()
     dict = {}
+    dict['id'] = []
+    dict['text'] = []
+    dict['annotations'] = []
     for id in ids:
         try:
             temp = load_tweet_with_annotation(id[:-1])
             if temp != "No annotations":
-                dict[id[:-1]] = temp
+                dict['id'].append(temp['id'])
+                dict['text'].append(temp['text'])
+                dict['annotations'].append(temp['annotations'])
         except:
             continue
         
