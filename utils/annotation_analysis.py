@@ -38,6 +38,8 @@ def histogram(df=corpus_dataframe):
         pos.append(test[key][0])
         neg.append(test[key][1])
         label.append(key)
+    fig = plt.figure()
+    ax = fig.add_axes()
     p1 = plt.bar(ind, neg, width, color='r')
     p2 = plt.bar(ind, pos, width, color='g')
     plt.ylabel('Opinions')
