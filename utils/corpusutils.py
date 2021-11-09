@@ -156,7 +156,7 @@ def load_tweet_with_annotation(id):
     else:
         res = {}
         res['id'] = id
-        res['text'] = open(tweetdir+id+'.txt').read()
+        res['text'] = open(tweetdir+id+'.txt',"r",encoding='utf-8').read()
         res['annotations'] = S
         return(res)
 
