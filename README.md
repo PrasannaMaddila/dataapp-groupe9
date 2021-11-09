@@ -1,5 +1,6 @@
-# DataApp_groupe_9
+# DataApp
 
 ## Dependencies
 - panda
 - numpy
+- pytest
