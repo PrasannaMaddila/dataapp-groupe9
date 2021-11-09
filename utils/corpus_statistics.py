@@ -1,26 +1,12 @@
 # import numpy as np
 import pandas as pd
-<<<<<<< HEAD
-from ast import literal_eval
-=======
 import json
->>>>>>> 9596eef72d45131a1d865030c88351e3b197cf31
 from pytest import *
-
-""" my_string = "{'key':'val','key2':2}"
-my_dict = ast.literal_eval(my_string)
-
- """
 
 
 corpus_dataframe = pd.read_csv("./corpus_dataframe.csv")
 # Drops the automatically added index column
 corpus_dataframe = corpus_dataframe.iloc[:, 1:]
-# Re-converts the string dictionary to the dictionary-dictionary
-corpus_dataframe = corpus_dataframe.assign(
-    annotations=literal_eval(corpus_dataframe["annotations"])
-)
-print(corpus_dataframe["annotations"][:]["topics"])
 
 
 def nb_tweets():
