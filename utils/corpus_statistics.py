@@ -85,6 +85,7 @@ def size_negative_vocab(df=corpus_dataframe):
 # print(subjects())
 # print(size_positive_vocab())
 # print(size_negative_vocab())
+<<<<<<< HEAD
 
 dataframe2 = corpus_dataframe[0:9]
 print(dataframe2)
@@ -106,3 +107,5 @@ def test():
     assert subjects == subjects(dataframe2)
     assert size_pos_voc == size_positive_vocab(dataframe2)
     assert size_neg_voc == size_negative_vocab(dataframe2)
+=======
+>>>>>>> e41b09e7b6936116dbb255eee8fc6661125b4edb

@@ -9,3 +9,6 @@ foo.txt
 *.[oa]
 # Ignore vscode directory
 .vscode
+
+# Ignore pycache
+./__pycache__
