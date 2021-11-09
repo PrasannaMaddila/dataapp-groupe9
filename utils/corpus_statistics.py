@@ -77,8 +77,8 @@ def size_negative_vocab(df=corpus_dataframe):
     return len(negative_keywords)
 
 
-# print(nb_tweets())
-# print(nb_annotations())
+print(nb_tweets())
+print(nb_annotations())
 # print(nb_negative_opinions())
 # print(nb_positive_opinions())
 # print(nb_subjects())
