@@ -106,3 +106,7 @@ def test():
     assert esubjects == subjects(dataframe2)
     assert size_pos_voc == size_positive_vocab(dataframe2)
     assert size_neg_voc == size_negative_vocab(dataframe2)
+    print("exitted with no errors")
+
+
+test()
