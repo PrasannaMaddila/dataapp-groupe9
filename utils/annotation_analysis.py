@@ -59,5 +59,3 @@ def miss_pos_neg_data(df):
 
 
 print(misses_opinions())
-print("\n")
-print(second())
