@@ -77,8 +77,8 @@ def size_negative_vocab(df=corpus_dataframe):
     return len(negative_keywords)
 
 
-print(nb_tweets())
-print(nb_annotations())
+# print(nb_tweets())
+# print(nb_annotations())
 # print(nb_negative_opinions())
 # print(nb_positive_opinions())
 # print(nb_subjects())
@@ -89,6 +89,20 @@ print(nb_annotations())
 dataframe2 = corpus_dataframe[0:9]
 print(dataframe2)
 
-# def test():
-#nbtweets = 9
-#assert nbtweets == nb_tweets(dataframe2)
+
+def test():
+    nb_ann = 9
+    nb_neg_op = 2
+    nb_pos_op = 0
+    nb_subj = 2
+    subjects = ["élection de #missfrance", "Miss France"]
+    size_pos_voc = 1
+    size_neg_voc = 2
+
+    assert nb_ann == nb_annotations(dataframe2)
+    assert nb_neg_op == nb_negative_opinions(dataframe2)
+    assert nb_pos_op == nb_positive_opinions(dataframe2)
+    assert nb_subj == nb_subjects(dataframe2)
+    assert subjects == subjects(dataframe2)
+    assert size_pos_voc == size_positive_vocab(dataframe2)
+    assert size_neg_voc == size_negative_vocab(dataframe2)
