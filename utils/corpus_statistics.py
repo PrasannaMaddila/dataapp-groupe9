@@ -73,5 +73,4 @@ def size_negative_vocab():
     for ann in corpus_dataframe["annotations"]:
         ann_dict = json.loads(ann.replace("'", '"'))
         negative_keywords |= set(ann_dict["negative_keywords"])
-    print(negative_keywords)
     return len(negative_keywords)
