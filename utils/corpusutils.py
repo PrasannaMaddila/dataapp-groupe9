@@ -1,3 +1,4 @@
+from _pytest.mark import KeywordMatcher
 import numpy as np
 import pandas as pd
 from pytest import *
@@ -6,9 +7,6 @@ from pytest import *
 datadir = "../Data/"
 annodir = datadir + "tweets-annotations/part-0/"
 tweetdir = datadir + "tweets/"
-
-
-from _pytest.mark import KeywordMatcher
 
 
 def read_and_load_ann_annotation(filename="143059118180139008.ann"):
@@ -86,10 +84,10 @@ def read_and_load_ann_annotation(filename="143059118180139008.ann"):
 
                 parsed_dict["negative_keywords"].append(" ".join(negative_entries))
             elif "Negative" in words[1]:
-                ## Here, we check the case of the word.
-                ## If word is TOPIC: insert into negative anyway.
-                ## Else: insert into "word_type"_keywords i.e. insert into
-                ## the type of the word
+                # Here, we check the case of the word.
+                # If word is TOPIC: insert into negative anyway.
+                # Else: insert into "word_type"_keywords i.e. insert into
+                # the type of the word
                 words = line.split()
                 for word in words[2:]:
                     key_word = word.partition(":")[2]
@@ -119,9 +117,10 @@ def read_and_load_ann_annotation(filename="143059118180139008.ann"):
 
 # Test for read_and_load():
 # from datavisualization.corpusutils import read_and_load_annotation
-from pytest import *
 
 # This is the test for our function above.
+
+
 def test_read_and_load_annotation():
     # Given
     filename = "143048389142134785.ann"
@@ -199,4 +198,6 @@ def load_corpus_in_dataframe():
     return pd.DataFrame.from_dict(dict)
 
 
-print(load_corpus_in_dataframe())
+corpus_dataframe = load_corpus_in_dataframe()
+corpus_dataframe.to_csv("./corpus_dataframe.csv")  # For repeated use later
+# print(corpus_dataframe)
