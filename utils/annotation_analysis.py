@@ -50,12 +50,20 @@ def pie_chart(df):
     raise NotImplementedError
 
 
-def histogram_miss_tweet_number(df):
-    raise NotImplementedError
+def histogram_miss_tweet_number(dict_miss):
+    for key in dict_miss.keys():
+        pos_data = dict_miss[key][0]
+        neg_data = dict_miss[key][1]
+
+    print(pos_data)
+    print("\n")
+    print(neg_data)
 
 
 def miss_pos_neg_data(df):
     raise NotImplementedError
 
 
-print(misses_opinions())
+dict_miss = misses_opinions()
+print(dict_miss)
+histogram_miss_tweet_number(dict_miss)
