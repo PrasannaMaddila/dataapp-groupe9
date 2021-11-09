@@ -82,7 +82,8 @@ def read_and_load_ann_annotation(filename="143059118180139008.ann"):
                 for key in key_word:
                     negative_entries.append(word_list[key]["word"])
 
-                parsed_dict["negative_keywords"].append(" ".join(negative_entries))
+                parsed_dict["negative_keywords"].append(
+                    " ".join(negative_entries))
             elif "Negative" in words[1]:
                 # Here, we check the case of the word.
                 # If word is TOPIC: insert into negative anyway.
@@ -154,7 +155,8 @@ def load_tweet_with_annotation(id):
     else:
         res = {}
         res["id"] = id
-        res["text"] = open(tweetdir + id + ".txt", "r", encoding="utf-8").read()
+        res["text"] = open(tweetdir + id + ".txt", "r",
+                           encoding="utf-8").read()
         res["annotations"] = S
         return res
 
