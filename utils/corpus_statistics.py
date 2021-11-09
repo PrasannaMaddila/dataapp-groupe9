@@ -1,7 +1,7 @@
 # import numpy as np
 import pandas as pd
 from pytest import *
-from json import *
+import json as json
 
 from dataapp_groupe_9.utils.corpusutils import read_and_load_ann_annotation
 
@@ -31,7 +31,7 @@ def nb_positive_opinions():
         dict_ann = json.loads(i.replace("'", '"'))
         topics = dict_ann['topics']
         for k in topics:
-            if topics[k]['opinion'] == 'positive':
+            if k['opinion'] == 'positive':
                 res += 1
     return res
 
@@ -42,20 +42,18 @@ def nb_negative_opinions():
         dict_ann = json.loads(i.replace("'", '"'))
         topics = dict_ann['topics']
         for k in topics:
-            if topics[k]['opinion'] == 'negative':
+            if k['opinion'] == 'negative':
                 res += 1
     return res
 
 
 def size_positive_vocab():
+    res = {}
+    for i in corpus_dataframe['annotations']:
+        dict_ann = json.loads(i.replace("'", '"'))
+        res |= set(dict_ann['positive_keywords'])
+    return(res)
 
 
 def size_negative_vocab():
-    res = []
-    for id in corpus_dataframe[0, :]:
-        filename = id + ".ann"
-        l = read_and_load_ann_annotation(filename)['negative_keywords']
-        for i in range(len(l)):
-            if l[i] not in res:
-                res.append(l[i])
-    return(len(res))
+    return 1
