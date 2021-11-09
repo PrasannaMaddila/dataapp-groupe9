@@ -15,15 +15,16 @@ def misses_opinions(df=corpus_dataframe):
         ann = json.loads(ann.replace("'", '"'))
         for topic in ann['topics']:
             words = topic['name'].lower().split()
+            topic['name'] = topic['name'].replace('-', ' ')
             if words[0] == 'miss':
-                close_keys = get_close_matches(topic['name'].lower(), dict.keys(), 1, 0.75)
-                print(close_keys, topic['name'].lower())
+                close_keys = get_close_matches(topic['name'].lower()[5:], [k[5:] for k in dict.keys()], 1, 0.5)
                 if close_keys:
-                    close_keys = close_keys[0]
+                    close_keys = 'miss ' + close_keys[0]
+                    min_len = min(len(close_keys), len(topic['name']))
                     if len(topic['name']) < len(close_keys):
-                        dict[topic['name'].upper()] = dict[close_keys]
+                        dict[topic['name'].lower()] = dict[close_keys]
                         del dict[close_keys]
-                        close_keys = topic['name']
+                        close_keys = topic['name'].lower()
                 else: close_keys = topic['name'].lower()
                 if not close_keys in dict:
                     dict[close_keys] = (0,0)
