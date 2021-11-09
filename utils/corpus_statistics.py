@@ -8,12 +8,10 @@ corpus_dataframe = corpus_dataframe.iloc[:, 1:]
 
 
 def nb_tweets():
-    return 1
-
+    return len(open('../Data/tweets-ids').readlines())
 
 def nb_annotations():
-    return 1
-
+    return len(corpus_dataframe['annotations'])
 
 def nb_subjects():
     return 1
