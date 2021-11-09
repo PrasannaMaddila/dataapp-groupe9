@@ -1,23 +1,10 @@
 # import numpy as np
 import pandas as pd
-import json
 from pytest import *
-
-# from corpusutils import corpus_dataframe
-
-""" my_string = "{'key':'val','key2':2}"
-my_dict = ast.literal_eval(my_string)
-
- """
-
+import json
 
 corpus_dataframe = pd.read_csv("./corpus_dataframe.csv")
-# Drops the automatically added index column
 corpus_dataframe = corpus_dataframe.iloc[:, 1:]
-# Re-converts the string dictionary to the dictionary-dictionary
-""" for ann in corpus_dataframe["annotations"]:
-    ann_dict = json.loads(ann.replace("'", '"'))
-print(type(corpus_dataframe["annotations"][0])) """
 
 
 def nb_tweets():
@@ -52,18 +39,35 @@ def subjects(df):
 
 
 def nb_positive_opinions():
-    return 1
+    res = 0
+    for i in corpus_dataframe["annotations"]:
+        dict_ann = json.loads(i.replace("'", '"'))
+        topics = dict_ann["topics"]
+        for k in topics:
+            if k["opinion"] == "positive":
+                res += 1
+    return res
 
 
 def nb_negative_opinions():
-    return 1
+    res = 0
+    for i in corpus_dataframe["annotations"]:
+        dict_ann = json.loads(i.replace("'", '"'))
+        topics = dict_ann["topics"]
+        for k in topics:
+            if k["opinion"] == "negative":
+                res += 1
+    return res
 
 
 def size_positive_vocab():
-    return 1
+    res = {}
+    for i in corpus_dataframe["annotations"]:
+        dict_ann = json.loads(i.replace("'", '"'))
+        res |= set(dict_ann["positive_keywords"])
+    return res
 
 
-# Need to update for using literal_eval'ed dataframe
 def size_negative_vocab():
     negative_keywords = set()
     for ann in corpus_dataframe["annotations"]:
@@ -71,8 +75,3 @@ def size_negative_vocab():
         negative_keywords |= set(ann_dict["negative_keywords"])
     print(negative_keywords)
     return len(negative_keywords)
-
-
-print(nb_tweets(), nb_annotations())
-print(size_negative_vocab())
-print(nb_subjects(corpus_dataframe), subjects(corpus_dataframe))
