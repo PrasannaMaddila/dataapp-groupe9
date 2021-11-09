@@ -1,6 +1,10 @@
 # import numpy as np
 import pandas as pd
+<<<<<<< HEAD
 from ast import literal_eval
+=======
+import json
+>>>>>>> 9596eef72d45131a1d865030c88351e3b197cf31
 from pytest import *
 
 """ my_string = "{'key':'val','key2':2}"
@@ -20,11 +24,10 @@ print(corpus_dataframe["annotations"][:]["topics"])
 
 
 def nb_tweets():
-    return corpus_dataframe
-
+    return len(open('../Data/tweets-ids').readlines())
 
 def nb_annotations():
-    return 1
+    return len(corpus_dataframe['annotations'])
 
 
 def nb_subjects():
@@ -47,9 +50,14 @@ def size_positive_vocab():
     return 1
 
 
+# Need to update for using literal_eval'ed dataframe
 def size_negative_vocab():
-    return 1
+    negative_keywords = set()
+    for ann in corpus_dataframe['annotations']:
+        ann_dict = json.loads(ann.replace("'", '"'))
+        negative_keywords |= set(ann_dict['negative_keywords'])
+    print(negative_keywords)
+    return len(negative_keywords)
 
-
-# print("Num. of subjects: " + nb_subjects() + "\n")
-# print("Subjects: \n" + subjects)
+print(nb_tweets(), nb_annotations())
+print(size_negative_vocab())
