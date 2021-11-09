@@ -3,9 +3,9 @@ import pandas as pd
 from pytest import *
 
 
-datadir = '../Data/'
-annodir = datadir+'tweets-annotations/part-0/'
-tweetdir = datadir+'tweets/'
+datadir = "../Data/"
+annodir = datadir + "tweets-annotations/part-0/"
+tweetdir = datadir + "tweets/"
 
 
 from _pytest.mark import KeywordMatcher
@@ -126,7 +126,7 @@ def test_read_and_load_annotation():
     # Given
     filename = "143048389142134785.ann"
     # When
-    annotations = read_and_load_annotation(filename)
+    annotations = read_and_load_ann_annotation(filename)
     # Then
     assert annotations == {
         "topics": [{"name": "élection de #missfrance", "opinion": "negative"}],
@@ -136,7 +136,7 @@ def test_read_and_load_annotation():
     # Given
     filename1 = "143059118180139008.ann"  # "143048389142134785.ann"  #
     # When
-    annotations1 = read_and_load_annotation(filename1)
+    annotations1 = read_and_load_ann_annotation(filename1)
     # Then
     assert annotations1 == {
         "topics": [
@@ -148,44 +148,55 @@ def test_read_and_load_annotation():
     }
 
 
-
 def load_tweet_with_annotation(id):
-    S = read_and_load_ann_annotation(annodir+id+'.ann')
+    S = read_and_load_ann_annotation(annodir + id + ".ann")
     if S == {}:
-        return("No annotations")
+        return "No annotations"
     else:
         res = {}
-        res['id'] = id
-        res['text'] = open(tweetdir+id+'.txt',"r",encoding='utf-8').read()
-        res['annotations'] = S
-        return(res)
+        res["id"] = id
+        res["text"] = open(tweetdir + id + ".txt", "r", encoding="utf-8").read()
+        res["annotations"] = S
+        return res
 
 
 def test_load_tweet_with_annotation():
     id = "143048389142134785"
     dict = load_tweet_with_annotation(id)
-    assert dict == {'id': "143048389142134785", 'text': "Ce soir c'est l'élection de #missfrance et je vais me faire un plaisir de NE PAS regarder.", 'annotation': {'topics': [{'name': 'Languedoc', 'opinion': 'positive'}, {'name': 'Nord-Pas-De-Calais', 'opinicon': 'negative'}], 'negative_keywords': ['pas aime'], 'positive_keywords': ['jolie', 'aime']}}
+    assert dict == {
+        "id": "143048389142134785",
+        "text": "Ce soir c'est l'élection de #missfrance et je vais me faire un plaisir de NE PAS regarder.",
+        "annotation": {
+            "topics": [
+                {"name": "Languedoc", "opinion": "positive"},
+                {"name": "Nord-Pas-De-Calais", "opinicon": "negative"},
+            ],
+            "negative_keywords": ["pas aime"],
+            "positive_keywords": ["jolie", "aime"],
+        },
+    }
     id = "143049242305495040"
     dict = load_tweet_with_annotation(id)
     assert dict == "No annotations"
 
 
 def load_corpus_in_dataframe():
-    ids = open(datadir+'tweets-ids').readlines()
+    ids = open(datadir + "tweets-ids").readlines()
     dict = {}
-    dict['id'] = []
-    dict['text'] = []
-    dict['annotations'] = []
+    dict["id"] = []
+    dict["text"] = []
+    dict["annotations"] = []
     for id in ids:
         try:
             temp = load_tweet_with_annotation(id[:-1])
             if temp != "No annotations":
-                dict['id'].append(temp['id'])
-                dict['text'].append(temp['text'])
-                dict['annotations'].append(temp['annotations'])
+                dict["id"].append(temp["id"])
+                dict["text"].append(temp["text"])
+                dict["annotations"].append(temp["annotations"])
         except:
             continue
-        
+
     return pd.DataFrame.from_dict(dict)
+
 
 print(load_corpus_in_dataframe())
