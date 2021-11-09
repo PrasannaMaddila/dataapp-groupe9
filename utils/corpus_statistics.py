@@ -85,7 +85,6 @@ def size_negative_vocab(df=corpus_dataframe):
 # print(subjects())
 # print(size_positive_vocab())
 # print(size_negative_vocab())
-<<<<<<< HEAD
 
 dataframe2 = corpus_dataframe[0:9]
 print(dataframe2)
@@ -96,7 +95,7 @@ def test():
     nb_neg_op = 2
     nb_pos_op = 0
     nb_subj = 2
-    subjects = ["élection de #missfrance", "Miss France"]
+    esubjects = ["élection de #missfrance", "Miss France"]
     size_pos_voc = 1
     size_neg_voc = 2
 
@@ -104,8 +103,6 @@ def test():
     assert nb_neg_op == nb_negative_opinions(dataframe2)
     assert nb_pos_op == nb_positive_opinions(dataframe2)
     assert nb_subj == nb_subjects(dataframe2)
-    assert subjects == subjects(dataframe2)
+    assert esubjects == subjects(dataframe2)
     assert size_pos_voc == size_positive_vocab(dataframe2)
     assert size_neg_voc == size_negative_vocab(dataframe2)
-=======
->>>>>>> e41b09e7b6936116dbb255eee8fc6661125b4edb
