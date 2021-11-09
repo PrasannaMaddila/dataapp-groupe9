@@ -76,11 +76,19 @@ def size_negative_vocab(df=corpus_dataframe):
         negative_keywords |= set(ann_dict["negative_keywords"])
     return len(negative_keywords)
 
-# print(nb_tweets())
-# print(nb_annotations())
+
+print(nb_tweets())
+print(nb_annotations())
 # print(nb_negative_opinions())
 # print(nb_positive_opinions())
-print(nb_subjects())
-print(subjects())
+# print(nb_subjects())
+# print(subjects())
 # print(size_positive_vocab())
 # print(size_negative_vocab())
+
+dataframe2 = corpus_dataframe[0:9]
+print(dataframe2)
+
+# def test():
+#nbtweets = 9
+#assert nbtweets == nb_tweets(dataframe2)
