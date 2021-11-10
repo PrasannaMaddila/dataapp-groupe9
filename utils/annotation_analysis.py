@@ -1,11 +1,10 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+from corpus_statistics import nb_negative_opinions, nb_positive_opinions
+import numpy as np
 from difflib import *
 from pytest import *
 import json
-from corpus_statistics import nb_negative_opinions, nb_positive_opinions
-import numpy as np
-
 
 corpus_dataframe = pd.read_csv("./corpus_dataframe.csv")
 corpus_dataframe = corpus_dataframe.iloc[:, 1:]
@@ -55,14 +54,23 @@ def misses_opinions(df=corpus_dataframe):
 def pie_chart(df=corpus_dataframe):
     pos = nb_positive_opinions(df)
     neg = nb_negative_opinions(df)
-    labels = 'Positive opinion proportion', 'Negative opinion proportion'
+    labels = "Positive opinion proportion", "Negative opinion proportion"
     sizes = [pos, neg]
     explode = (0.1, 0)
-    colors = ['g', 'r']
+    colors = ["g", "r"]
+
     fig1, ax1 = plt.subplots()
-    ax1.pie(sizes, explode=explode, labels=labels,
-            autopct='%1.1f%%', colors=colors, shadow=True, startangle=90, wedgeprops={'linewidth': 5})
-    ax1.axis('equal')
+    ax1.pie(
+        sizes,
+        explode=explode,
+        labels=labels,
+        autopct="%1.1f%%",
+        colors=colors,
+        shadow=True,
+        startangle=90,
+        wedgeprops={"linewidth": 5},
+    )
+    ax1.axis("equal")
     plt.show()
 
 
@@ -92,23 +100,15 @@ def histogram(df):
     p2 = plt.bar(ind, pos, width, color="g")
     plt.ylabel("Opinions")
     plt.title("Opinions on Miss France")
-    plt.xticks(ind, label)
-    plt.legend((p1[0], p2[0]), ['Negative', 'Positive'])
+    plt.xticks(ind, [string.title() for string in label])
+    plt.legend((p1[0], p2[0]), ["Negative", "Positive"])
+    plt.xticks(rotation=45, ha="right")
     plt.show()
 
 
-histogram()
-
-
-def histogram_miss_tweet_number(dict_miss):
-    for key in dict_miss.keys():
-        pos_data = dict_miss[key][0]
-        neg_data = dict_miss[key][1]
-
-    print(pos_data)
-    print("\n")
-    print(neg_data)
-
+""" def miss_pos_neg_data(df):
+    raise NotImplementedError
+ """
 
 if __name__ == "__main__":
     # Main execution loop: driver code

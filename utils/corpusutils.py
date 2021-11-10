@@ -1,10 +1,11 @@
 import numpy as np
 import pandas as pd
 from pytest import *
+import os
 
 
 datadir = "../Data/"
-annodir = datadir + "tweets-annotations/part-0/"
+annodir = datadir + "tweets-annotations/"
 tweetdir = datadir + "tweets/"
 
 
@@ -150,7 +151,11 @@ def test_read_and_load_annotation():
 
 
 def load_tweet_with_annotation(id):
-    S = read_and_load_ann_annotation(annodir + id + ".ann")
+    tweets_dir = annodir
+    for i in range(10):
+        if os.path.exists(annodir+'part-'+str(i)+'/'+id+'.ann'):
+            tweets_dir = annodir+'part-'+str(i)+'/'
+    S = read_and_load_ann_annotation(tweets_dir + id + ".ann")
     if S == {}:
         return "No annotations"
     else:
