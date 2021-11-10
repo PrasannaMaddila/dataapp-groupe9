@@ -28,7 +28,8 @@ def misses_opinions(df=corpus_dataframe):
             topic["name"] = topic["name"].replace("-", " ")
             if words[0] == "miss":
                 close_keys = get_close_matches(
-                    topic["name"].lower()[5:], [k[5:] for k in dict.keys()], 1, 0.6
+                    topic["name"].lower()[5:], [k[5:]
+                                                for k in dict.keys()], 1, 0.6
                 )
                 if close_keys:
                     close_keys = "miss " + close_keys[0]
@@ -77,7 +78,6 @@ def pie_chart(df=corpus_dataframe):
 
 
 def histogram(df):
-
     """test = {
         "Ms Jean-Marie Lafayette": (99, 3),
         "Mr Jean Luc Mélenchon": (50, 50),
@@ -113,6 +113,7 @@ def histogram(df):
 if __name__ == "__main__":
     # Main execution loop: driver code
     dict_miss = misses_opinions()
+    dict_miss.pop("miss")
     print(dict_miss)
     histogram(dict_miss)
     pie_chart(corpus_dataframe)
