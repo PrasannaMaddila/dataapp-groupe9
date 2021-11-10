@@ -26,10 +26,11 @@ def misses_opinions(df=corpus_dataframe):
                 continue
             words = topic["name"].lower().split()
             topic["name"] = topic["name"].replace("-", " ")
+            if len(words) < 2:
+                continue
             if words[0] == "miss":
                 close_keys = get_close_matches(
-                    topic["name"].lower()[5:], [k[5:]
-                                                for k in dict.keys()], 1, 0.6
+                    topic["name"].lower()[5:], [k[5:] for k in dict.keys()], 1, 0.6
                 )
                 if close_keys:
                     close_keys = "miss " + close_keys[0]
@@ -87,7 +88,7 @@ def histogram(df):
     label = []
     n = len(df)
     ind = np.arange(n)
-    width = 0.5  # Changed from 0.5
+    width =  0.8 # Changed from 0.5
     for key in df.keys():
         pos.append(df[key][0])
         neg.append(df[key][1])
@@ -113,7 +114,6 @@ def histogram(df):
 if __name__ == "__main__":
     # Main execution loop: driver code
     dict_miss = misses_opinions()
-    dict_miss.pop("miss")
     print(dict_miss)
     histogram(dict_miss)
     pie_chart(corpus_dataframe)
