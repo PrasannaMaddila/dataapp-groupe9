@@ -104,7 +104,7 @@ def histogram(df):
     plt.show()
 
 
-def individual_miss_graph(miss_name, dict):
+def individual_miss_graph_pie(miss_name, dict):
     key = get_close_matches(miss_name.lower(), dict.keys(), 1, 0.6)[0]
     # Now that we have the key, we can plot her data.
     labels = ["Positive", "Negative"]
@@ -133,7 +133,24 @@ def individual_miss_graph(miss_name, dict):
     plt.title("Opinions on {0}: +{1}, -{2}".format(key.title(), pos, neg))
     plt.show()
 
-    return 1
+
+def individual_miss_graph_bar(miss_name, dict):
+    key = get_close_matches(miss_name.lower(), dict.keys(), 1, 0.6)[0]
+    # Now that we have the key, we can plot her data.
+    labels = ["Positive", "Negative"]
+    print(key)
+
+    # Now to plot the graph
+    pos = dict[key][0]
+    neg = dict[key][1]
+    labels = ["Positive", "Negative"]
+    heights = [pos, neg]
+    colors = ["green", "red"]
+
+    plt.bar(labels, heights, color=colors)
+    plt.title("Opinions on {0}: +{1}, -{2}".format(key.title(), pos, neg))
+    plt.xticks(rotation=45, ha="right")
+    plt.show()
 
 
 """ def miss_pos_neg_data(df):
@@ -143,6 +160,8 @@ def individual_miss_graph(miss_name, dict):
 if __name__ == "__main__":
     # Main execution loop: driver code
     dict_miss = misses_opinions()
-    histogram(dict_miss)
+    """ histogram(dict_miss)
     pie_chart(corpus_dataframe)
-    individual_miss_graph("reunion", dict_miss)
+    individual_miss_graph_pie("reunion", dict_miss)
+    """
+    individual_miss_graph_bar("reunion", dict_miss)
