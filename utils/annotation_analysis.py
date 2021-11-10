@@ -113,6 +113,7 @@ def histogram_miss_tweet_number(dict_miss):
 if __name__ == "__main__":
     # Main execution loop: driver code
     dict_miss = misses_opinions()
+    dict_miss.pop("miss")
     print(dict_miss)
     histogram(dict_miss)
     pie_chart(corpus_dataframe)
