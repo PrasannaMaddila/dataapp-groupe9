@@ -3,12 +3,12 @@ import pandas as pd
 from pytest import *
 import json
 
-corpus_dataframe = pd.read_csv("./corpus_dataframe.csv", header=0)
+corpus_dataframe = pd.read_csv("./utils/corpus_dataframe.csv", header=0)
 # corpus_dataframe = corpus_dataframe.iloc[:, 1:]
 
 
 def nb_tweets():
-    return len(open("../Data/tweets-ids").readlines())
+    return len(open("./Data/tweets-ids").readlines())
 
 
 def nb_annotations(df=corpus_dataframe):

@@ -5,7 +5,7 @@ from pytest import *
 import os
 
 
-datadir = "../Data/"
+datadir = "./Data/"
 annodir = datadir + "tweets-annotations/"
 tweetdir = datadir + "tweets/"
 

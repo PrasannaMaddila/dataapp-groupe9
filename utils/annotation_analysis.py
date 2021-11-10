@@ -1,12 +1,12 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from corpus_statistics import nb_negative_opinions, nb_positive_opinions
+from .corpus_statistics import nb_negative_opinions, nb_positive_opinions
 import numpy as np
 from difflib import *
 from pytest import *
 import json
 
-corpus_dataframe = pd.read_csv("./corpus_dataframe.csv")
+corpus_dataframe = pd.read_csv("./utils/corpus_dataframe.csv")
 # corpus_dataframe = corpus_dataframe.iloc[:, 1:]
 
 # returns a dictionnay
