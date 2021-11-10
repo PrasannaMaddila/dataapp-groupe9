@@ -5,7 +5,7 @@ dict_miss = misses_opinions()
 keys = dict_miss.keys()
 
 parser = argparse.ArgumentParser(
-    description="Afficher les statistiques relatives à l'élection de la prochaine Miss France")
+    description="Show statistics relative to the Miss France competition")
 
 parser.add_argument("-H", "--histogram", action="store_true",
                     help="Display the histogram of all the competitors and their ratings in the Miss France competition")
