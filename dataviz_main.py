@@ -1,8 +1,7 @@
-from utils import annotations_analysis
+from utils.annotation_analysis import  *
 
 def main():
-	dict_miss = misses_opinions()
-    dict_miss.pop("miss")
+    dict_miss = misses_opinions()
     histogram(dict_miss)
     pie_chart(corpus_dataframe)
 
