@@ -30,8 +30,7 @@ def misses_opinions(df=corpus_dataframe):
                 continue
             if words[0] == "miss":
                 close_keys = get_close_matches(
-                    topic["name"].lower()[5:], [k[5:]
-                                                for k in dict.keys()], 1, 0.6
+                    topic["name"].lower()[5:], [k[5:] for k in dict.keys()], 1, 0.6
                 )
                 if close_keys:
                     close_keys = "miss " + close_keys[0]

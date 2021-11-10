@@ -3,8 +3,8 @@ import pandas as pd
 from pytest import *
 import json
 
-corpus_dataframe = pd.read_csv("./corpus_dataframe.csv")
-corpus_dataframe = corpus_dataframe.iloc[:, 1:]
+corpus_dataframe = pd.read_csv("./corpus_dataframe.csv", header=0)
+# corpus_dataframe = corpus_dataframe.iloc[:, 1:]
 
 
 def nb_tweets():
