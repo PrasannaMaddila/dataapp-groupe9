@@ -7,7 +7,7 @@ from pytest import *
 import json
 
 corpus_dataframe = pd.read_csv("./corpus_dataframe.csv")
-corpus_dataframe = corpus_dataframe.iloc[:, 1:]
+#corpus_dataframe = corpus_dataframe.iloc[:, 1:]
 
 # returns a dictionnay
 # keys: Misses names, values : pair of (positive,negative)
