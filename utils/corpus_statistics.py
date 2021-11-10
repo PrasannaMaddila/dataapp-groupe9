@@ -101,7 +101,7 @@ print(nb_annotations())
 # print(subjects())
 # print(size_positive_vocab())
 # print(size_negative_vocab())
-print(corpus_frequent_words())
+# print(corpus_frequent_words())
 
 dataframe2 = corpus_dataframe[0:9]
 print(dataframe2)

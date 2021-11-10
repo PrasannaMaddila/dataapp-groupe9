@@ -211,7 +211,6 @@ def tweet_to_words(tweet):
     return set(TextBlob(tweet).words.lemmatize())-set(flagged_words)
 
 
-print(tweet_to_words("Miss Alsace, haut commissaire aux français de souche ! Miss France #MissFrance2012 #MissFrance"))
 
 corpus_dataframe = load_corpus_in_dataframe()
 corpus_dataframe.to_csv("./corpus_dataframe.csv", index=False)  # For repeated use later
