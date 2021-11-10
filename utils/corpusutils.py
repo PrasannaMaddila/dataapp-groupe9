@@ -85,8 +85,7 @@ def read_and_load_ann_annotation(filename="143059118180139008.ann"):
                 for key in key_word:
                     negative_entries.append(word_list[key]["word"])
 
-                parsed_dict["negative_keywords"].append(
-                    " ".join(negative_entries))
+                parsed_dict["negative_keywords"].append(" ".join(negative_entries))
             elif "Negative" in words[1]:
                 ## Here, we check the case of the word.
                 ## If word is TOPIC: insert into negative anyway.
@@ -153,16 +152,15 @@ def test_read_and_load_annotation():
 def load_tweet_with_annotation(id):
     tweets_dir = annodir
     for i in range(10):
-        if os.path.exists(annodir+'part-'+str(i)+'/'+id+'.ann'):
-            tweets_dir = annodir+'part-'+str(i)+'/'
+        if os.path.exists(annodir + "part-" + str(i) + "/" + id + ".ann"):
+            tweets_dir = annodir + "part-" + str(i) + "/"
     S = read_and_load_ann_annotation(tweets_dir + id + ".ann")
     if S == {}:
         return "No annotations"
     else:
         res = {}
         res["id"] = id
-        res["text"] = open(tweetdir + id + ".txt", "r",
-                           encoding="utf-8").read()
+        res["text"] = open(tweetdir + id + ".txt", "r", encoding="utf-8").read()
         res["annotations"] = S
         return res
 
@@ -207,5 +205,5 @@ def load_corpus_in_dataframe():
 
 
 corpus_dataframe = load_corpus_in_dataframe()
-corpus_dataframe.to_csv("./corpus_dataframe.csv")  # For repeated use later
+corpus_dataframe.to_csv("./corpus_dataframe.csv", index=False)  # For repeated use later
 print(corpus_dataframe)
