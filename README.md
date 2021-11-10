@@ -3,6 +3,7 @@
 ## Dependencies
 
 Run the following command to install the requirements
+
 ```pip3 install -r requirements.txt```
 
 ## Running the app
