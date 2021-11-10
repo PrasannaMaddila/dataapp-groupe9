@@ -77,17 +77,19 @@ def histogram(df=corpus_dataframe):
     label = []
     n = len(test)
     ind = np.arange(n)
-    width = 0.5
+    width = 0.5  # Changed from 0.5
     for key in test.keys():
         pos.append(test[key][0])
         neg.append(test[key][1])
         label.append(key)
     fig = plt.figure()
     ax = fig.add_axes()
-    p1 = plt.bar(ind, neg, width, color='r')
-    p2 = plt.bar(ind, pos, width, color='g')
-    plt.ylabel('Opinions')
-    plt.title('Opinions on Miss France')
+    p1 = plt.bar(
+        ind, [neg[index] + pos[index] for index in range(len(neg))], width, color="r"
+    )
+    p2 = plt.bar(ind, pos, width, color="g")
+    plt.ylabel("Opinions")
+    plt.title("Opinions on Miss France")
     plt.xticks(ind, label)
     plt.legend((p1[0], p2[0]), ['Negative', 'Positive'])
     plt.show()
