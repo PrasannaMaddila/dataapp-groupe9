@@ -1,6 +1,5 @@
 # DataApp
 
 ## Dependencies
-- panda
-- numpy
-- pytest
+
+Run "pip install -r requirements.txt",
