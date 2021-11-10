@@ -2,6 +2,7 @@
 import pandas as pd
 from pytest import *
 import json
+from utils.corpusutils import tweet_to_words, datadir, tweetdir
 
 corpus_dataframe = pd.read_csv("./utils/corpus_dataframe.csv", header=0)
 # corpus_dataframe = corpus_dataframe.iloc[:, 1:]
@@ -77,6 +78,21 @@ def size_negative_vocab(df=corpus_dataframe):
     return len(negative_keywords)
 
 
+def corpus_frequent_words():
+    ids = open(datadir + "tweets-ids").readlines()
+    dict = {}
+    for id in ids:
+        try:
+            tweet = open(tweetdir+id[:-1]+'.txt','r',encoding='utf-8').read()
+            words = tweet_to_words(tweet)
+            for word in words:
+                if not word in dict:
+                    dict[word] = 0
+                dict[word] += tweet.count(word)
+        except: continue
+    return dict
+
+
 print(nb_tweets())
 print(nb_annotations())
 # print(nb_negative_opinions())
@@ -85,6 +101,7 @@ print(nb_annotations())
 # print(subjects())
 # print(size_positive_vocab())
 # print(size_negative_vocab())
+print(corpus_frequent_words())
 
 dataframe2 = corpus_dataframe[0:9]
 print(dataframe2)

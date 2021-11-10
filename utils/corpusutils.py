@@ -210,12 +210,6 @@ def tweet_to_words(tweet):
     flagged_words = open(assetsdir+"frenchST.txt", "r", encoding='utf-8').read().split('\n')
     return set(TextBlob(tweet).words.lemmatize())-set(flagged_words)
 
-# def tweet_to_words():
-    flagged_words = open(assetsdir+"frenchST.txt", "r", encoding='utf-8').readlines().split('\n')
-    ids = open(datadir + "tweets-ids").readlines()
-    for id in ids:
-        open(tweetdir+id+'.txt','r',encoding='utf-8')
-
 
 print(tweet_to_words("Miss Alsace, haut commissaire aux français de souche ! Miss France #MissFrance2012 #MissFrance"))
 
