@@ -1,13 +1,15 @@
 import numpy as np
 import pandas as pd
 from pytest import *
+from textblob import TextBlob
+from textblob_fr import PatternTagger, PatternAnalyzer
 import os
 
 
 datadir = "./Data/"
 annodir = datadir + "tweets-annotations/"
 tweetdir = datadir + "tweets/"
-
+assetsdir = "./assets/"
 
 from _pytest.mark import KeywordMatcher
 
@@ -203,6 +205,18 @@ def load_corpus_in_dataframe():
 
     return pd.DataFrame.from_dict(dict)
 
+
+def tweet_to_words(tweet):
+    return set(TextBlob(tweet).words.lemmatize())
+
+# def tweet_to_words():
+    flagged_words = open(assetsdir+"frenchST.txt", "r", encoding='utf-8').readlines().split('\n')
+    ids = open(datadir + "tweets-ids").readlines()
+    for id in ids:
+        open(tweetdir+id+'.txt','r',encoding='utf-8')
+
+
+print(tweet_to_words("Miss Alsace, haut commissaire aux français de souche ! Miss France #MissFrance2012 #MissFrance"))
 
 corpus_dataframe = load_corpus_in_dataframe()
 corpus_dataframe.to_csv("./corpus_dataframe.csv", index=False)  # For repeated use later
