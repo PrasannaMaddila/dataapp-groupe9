@@ -7,7 +7,7 @@ from pytest import *
 import json
 
 corpus_dataframe = pd.read_csv("./corpus_dataframe.csv")
-#corpus_dataframe = corpus_dataframe.iloc[:, 1:]
+# corpus_dataframe = corpus_dataframe.iloc[:, 1:]
 
 # returns a dictionnay
 # keys: Misses names, values : pair of (positive,negative)
@@ -75,9 +75,6 @@ def pie_chart(df=corpus_dataframe):
     plt.show()
 
 
-# pie_chart()
-
-
 def histogram(df):
     """test = {
         "Ms Jean-Marie Lafayette": (99, 3),
@@ -88,7 +85,7 @@ def histogram(df):
     label = []
     n = len(df)
     ind = np.arange(n)
-    width =  0.8 # Changed from 0.5
+    width = 0.8  # Changed from 0.5
     for key in df.keys():
         pos.append(df[key][0])
         neg.append(df[key][1])
@@ -107,6 +104,38 @@ def histogram(df):
     plt.show()
 
 
+def individual_miss_graph(miss_name, dict):
+    key = get_close_matches(miss_name.lower(), dict.keys(), 1, 0.6)[0]
+    # Now that we have the key, we can plot her data.
+    labels = ["Positive", "Negative"]
+    print(key)
+
+    # Now to plot the graph
+    pos = dict[key][0]
+    neg = dict[key][1]
+    labels = ["Positive", "Negative"]
+    sizes = [pos, neg]
+    explode = (0.1, 0)
+    colors = ["g", "r"]
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(
+        sizes,
+        explode=explode,
+        labels=labels,
+        autopct="%1.1f%%",
+        colors=colors,
+        shadow=True,
+        startangle=90,
+        wedgeprops={"linewidth": 5},
+    )
+    ax1.axis("equal")
+    plt.title("Opinions on {0}: +{1}, -{2}".format(key.title(), pos, neg))
+    plt.show()
+
+    return 1
+
+
 """ def miss_pos_neg_data(df):
     raise NotImplementedError
  """
@@ -114,6 +143,6 @@ def histogram(df):
 if __name__ == "__main__":
     # Main execution loop: driver code
     dict_miss = misses_opinions()
-    print(dict_miss)
     histogram(dict_miss)
     pie_chart(corpus_dataframe)
+    individual_miss_graph("reunion", dict_miss)
