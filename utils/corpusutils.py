@@ -207,7 +207,8 @@ def load_corpus_in_dataframe():
 
 
 def tweet_to_words(tweet):
-    return set(TextBlob(tweet).words.lemmatize())
+    flagged_words = open(assetsdir+"frenchST.txt", "r", encoding='utf-8').read().split('\n')
+    return set(TextBlob(tweet).words.lemmatize())-set(flagged_words)
 
 # def tweet_to_words():
     flagged_words = open(assetsdir+"frenchST.txt", "r", encoding='utf-8').readlines().split('\n')
