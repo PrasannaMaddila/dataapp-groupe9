@@ -8,16 +8,15 @@ def words_graph(dict):
     words.reverse()
     if len(words) > 40:
         words = words[:40]
-    print(words)
 
     # Now to plot the graph
+    labels = [item[1] for item in words]
+    heights = [item[0] for item in words]
 
-    colors = ["cyan", "red"]
-
-    # plt.bar(labels, heights, color=colors)
-    # plt.title("Words frequencies" , words, frequencies))
+    plt.bar(labels, heights)
+    plt.title("Words frequencies")
     # plt.xticks(rotation=45, ha="right")
-    # plt.show()
+    plt.show()
 
 def test():
     words_graph({"hello": 3, "yes": 2})
