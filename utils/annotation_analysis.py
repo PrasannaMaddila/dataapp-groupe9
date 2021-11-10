@@ -69,18 +69,20 @@ def pie_chart(df=corpus_dataframe):
 # pie_chart()
 
 
-def histogram(df=corpus_dataframe):
-
-    test = {'Ms Jean-Marie Lafayette': (99, 3), 'Mr Jean Luc Mélenchon': (
-        50, 50), 'Ghandi the Wise': (98, 2)}
+def histogram(df):
+    """test = {
+        "Ms Jean-Marie Lafayette": (99, 3),
+        "Mr Jean Luc Mélenchon": (50, 50),
+        "Ghandi the Wise": (98, 2),
+    }"""
     pos, neg = [], []
     label = []
-    n = len(test)
+    n = len(df)
     ind = np.arange(n)
     width = 0.5  # Changed from 0.5
-    for key in test.keys():
-        pos.append(test[key][0])
-        neg.append(test[key][1])
+    for key in df.keys():
+        pos.append(df[key][0])
+        neg.append(df[key][1])
         label.append(key)
     fig = plt.figure()
     ax = fig.add_axes()
@@ -108,10 +110,9 @@ def histogram_miss_tweet_number(dict_miss):
     print(neg_data)
 
 
-def miss_pos_neg_data(df):
-    raise NotImplementedError
-
-
-dict_miss = misses_opinions()
-print(dict_miss)
-histogram_miss_tweet_number(dict_miss)
+if __name__ == "__main__":
+    # Main execution loop: driver code
+    dict_miss = misses_opinions()
+    print(dict_miss)
+    histogram(dict_miss)
+    pie_chart(corpus_dataframe)
