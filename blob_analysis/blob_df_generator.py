@@ -1,17 +1,13 @@
 from textblob import TextBlob
+from textblob_fr import PatternTagger, PatternAnalyzer
 import pandas as pd
 
-import nltk.data
+## This file generates the analysis of the tweets in the
+## corpus using the pre-existing dataframe, and runs
+## it through textblob-fr.
 
-# chargement du tokenizer
-try:
-    tokenizer = nltk.data.load("tokenizers/punkt/french.pickle")
-    print("French worked")
-except:
-    print("French didn't work")
-
-word = TextBlob("Hello World!")
-print(word.sentiment)
+## NOTE: Run this program in the root git folder to
+## regenerate blob_dataframe in the correct location.
 
 df_path = "./corpus_dataframe.csv"
 corpus_dataframe = pd.read_csv("./utils/corpus_dataframe.csv", header=0)
@@ -22,7 +18,9 @@ def create_sentiment_df(df):
     id, temp = 0, []
     for index, row in df.iterrows():  # id, tweet in df["id"], df["text"]:
         id = row["id"]
-        temp = TextBlob(row["text"])
+        temp = TextBlob(
+            row["text"], pos_tagger=PatternTagger(), analyzer=PatternAnalyzer()
+        )
         blob_dataframe = blob_dataframe.append(
             {
                 "id": str(id),
