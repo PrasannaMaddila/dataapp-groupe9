@@ -2,13 +2,15 @@ from _pytest.mark import KeywordMatcher
 import numpy as np
 import pandas as pd
 from pytest import *
+from textblob import TextBlob
+from textblob_fr import PatternTagger, PatternAnalyzer
 import os
 
 
 datadir = "./Data/"
 annodir = datadir + "tweets-annotations/"
 tweetdir = datadir + "tweets/"
-
+assetsdir = "./assets/"
 
 def read_and_load_ann_annotation(filename="143059118180139008.ann"):
     # Reading the contents of the file
@@ -205,6 +207,12 @@ def load_corpus_in_dataframe():
             continue
 
     return pd.DataFrame.from_dict(dict)
+
+
+def tweet_to_words(tweet):
+    flagged_words = open(assetsdir+"frenchST.txt", "r", encoding='utf-8').read().split('\n')
+    return set(TextBlob(tweet).words.lemmatize())-set(flagged_words)
+
 
 
 corpus_dataframe = load_corpus_in_dataframe()

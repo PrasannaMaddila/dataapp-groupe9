@@ -5,3 +5,4 @@ Pillow==8.4.0
 pyparsing==2.4.7
 pytest==6.2.5
 textblob==0.17.1
+textblob-fr==0.2.0
