@@ -1,3 +1,4 @@
+from _pytest.mark import KeywordMatcher
 import numpy as np
 import pandas as pd
 from pytest import *
@@ -10,9 +11,6 @@ datadir = "./Data/"
 annodir = datadir + "tweets-annotations/"
 tweetdir = datadir + "tweets/"
 assetsdir = "./assets/"
-
-from _pytest.mark import KeywordMatcher
-
 
 def read_and_load_ann_annotation(filename="143059118180139008.ann"):
     # Reading the contents of the file
@@ -68,13 +66,14 @@ def read_and_load_ann_annotation(filename="143059118180139008.ann"):
                     if "topic" in word_list[key_word]["type"]:
                         parsed_dict["topics"].append(
                             {
-                                "name": word_list[key_word]["word"].replace('"','').replace("'",''),
+                                "name": word_list[key_word]["word"].replace('"', '').replace("'", ''),
                                 "opinion": "positive",
                             }
                         )
                     else:
                         parsed_dict["positive_keywords"].append(
-                            word_list[key_word]["word"].replace('"','').replace("'",'')
+                            word_list[key_word]["word"].replace(
+                                '"', '').replace("'", '')
                         )
                     # end of if-insert-positive
                 # end of for
@@ -85,28 +84,31 @@ def read_and_load_ann_annotation(filename="143059118180139008.ann"):
                 key_word = [word.partition(":")[2] for word in words[2:]]
                 negative_entries = []
                 for key in key_word:
-                    negative_entries.append(word_list[key]["word"].replace('"','').replace("'",''))
+                    negative_entries.append(
+                        word_list[key]["word"].replace('"', '').replace("'", ''))
 
-                parsed_dict["negative_keywords"].append(" ".join(negative_entries))
+                parsed_dict["negative_keywords"].append(
+                    " ".join(negative_entries))
             elif "Negative" in words[1]:
-                ## Here, we check the case of the word.
-                ## If word is TOPIC: insert into negative anyway.
-                ## Else: insert into "word_type"_keywords i.e. insert into
-                ## the type of the word
+                # Here, we check the case of the word.
+                # If word is TOPIC: insert into negative anyway.
+                # Else: insert into "word_type"_keywords i.e. insert into
+                # the type of the word
                 words = line.split()
                 for word in words[2:]:
                     key_word = word.partition(":")[2]
                     if "topics" in word_list[key_word]["type"]:
                         parsed_dict["topics"].append(
                             {
-                                "name": word_list[key_word]["word"].replace('"','').replace("'",''),
+                                "name": word_list[key_word]["word"].replace('"', '').replace("'", ''),
                                 "opinion": "negative",
                             }
                         )
                     else:
                         # It is not a topic, and we need to check its type
                         parsed_dict[word_list[key_word]["type"] + "_keywords"].append(
-                            word_list[key_word]["word"].replace('"','').replace("'",'')
+                            word_list[key_word]["word"].replace(
+                                '"', '').replace("'", '')
                         )
                     # end of if-insert-negative
                 # end of for """
@@ -122,9 +124,9 @@ def read_and_load_ann_annotation(filename="143059118180139008.ann"):
 
 # Test for read_and_load():
 # from datavisualization.corpusutils import read_and_load_annotation
-from pytest import *
 
 # This is the test for our function above.
+
 def test_read_and_load_annotation():
     # Given
     filename = "143048389142134785.ann"
@@ -162,7 +164,8 @@ def load_tweet_with_annotation(id):
     else:
         res = {}
         res["id"] = id
-        res["text"] = open(tweetdir + id + ".txt", "r", encoding="utf-8").read()
+        res["text"] = open(tweetdir + id + ".txt", "r",
+                           encoding="utf-8").read()
         res["annotations"] = S
         return res
 
@@ -213,5 +216,6 @@ def tweet_to_words(tweet):
 
 
 corpus_dataframe = load_corpus_in_dataframe()
-corpus_dataframe.to_csv("./corpus_dataframe.csv", index=False)  # For repeated use later
+corpus_dataframe.to_csv("./corpus_dataframe.csv",
+                        index=False)  # For repeated use later
 print(corpus_dataframe)
