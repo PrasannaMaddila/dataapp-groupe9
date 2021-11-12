@@ -1,12 +1,16 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from .corpus_statistics import nb_negative_opinions, nb_positive_opinions
+from pandas.core.frame import DataFrame
+#from utils.corpus_statistics import nb_negative_opinions, nb_positive_opinions
 import numpy as np
 from difflib import *
 from pytest import *
 import json
+import seaborn as sns
+
 
 corpus_dataframe = pd.read_csv("./utils/corpus_dataframe.csv")
+corpus_miss_opinions = pd.read_csv("corpus miss opinions.csv")
 # corpus_dataframe = corpus_dataframe.iloc[:, 1:]
 
 # returns a dictionnay
@@ -53,7 +57,7 @@ def misses_opinions(df=corpus_dataframe):
     return dict
 
 
-def pie_chart(df=corpus_dataframe):
+''' def pie_chart(df=corpus_dataframe):
     pos = nb_positive_opinions(df)
     neg = nb_negative_opinions(df)
     labels = "Positive opinion proportion", "Negative opinion proportion"
@@ -74,9 +78,10 @@ def pie_chart(df=corpus_dataframe):
     )
     ax1.axis("equal")
     plt.show()
+ '''
 
 
-def histogram(df):
+def histogram(df=corpus_dataframe):
     """test = {
         "Ms Jean-Marie Lafayette": (99, 3),
         "Mr Jean Luc Mélenchon": (50, 50),
@@ -166,3 +171,29 @@ if __name__ == "__main__":
     individual_miss_graph_pie("reunion", dict_miss)
     """
     individual_miss_graph_bar("reunion", dict_miss)
+
+
+def seaborn_histogramm(df=corpus_miss_opinions):
+    sns.set_theme(style="whitegrid")
+    f, ax = plt.subplots(figsize=(6, 15))
+
+    sns.set_color_codes("muted")
+    sns.barplot(x="2", y="0", data=df,
+                label="Neutral", color="orange")
+
+    sns.set_color_codes("pastel")
+    sns.barplot(x="1", y="0", data=df,
+                label="Positive", color="g", alpha=0.5)
+
+    sns.set_color_codes("muted")
+    sns.barplot(x="3", y="0", data=df,
+                label="Negative", color="r", alpha=0.5)
+
+    ax.legend(ncol=3, loc="lower right", frameon=True)
+    ax.set(xlim=(0, 24), ylabel="",
+           xlabel="Number of opinions")
+    sns.despine(left=True, bottom=True)
+    plt.show()
+
+
+seaborn_histogramm()

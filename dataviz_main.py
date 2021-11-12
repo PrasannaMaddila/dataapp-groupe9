@@ -1,6 +1,8 @@
-from utils.annotation_analysis import  *
+from utils.annotation_analysis import *
 from utils.corpus_statistics import *
 from utils.tweets_analysis import *
+from utils.annotation_analysis import *
+
 
 def main():
     dict_miss = misses_opinions()
@@ -8,5 +10,6 @@ def main():
     pie_chart(corpus_dataframe)
     words_graph(corpus_frequent_words())
 
+
 if __name__ == '__main__':
-	main()
+    main()
