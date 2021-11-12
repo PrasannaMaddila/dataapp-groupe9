@@ -1,13 +1,13 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 from pandas.core.frame import DataFrame
-from utils.corpus_statistics import nb_negative_opinions, nb_positive_opinions
+#from utils.corpus_statistics import nb_negative_opinions, nb_positive_opinions
 import numpy as np
 from difflib import *
 from pytest import *
 import json
 import seaborn as sns
-from utils.Opinion_analysis import *
+
 
 corpus_dataframe = pd.read_csv("./utils/corpus_dataframe.csv")
 corpus_miss_opinions = pd.read_csv("corpus miss opinions.csv")
@@ -57,7 +57,7 @@ def misses_opinions(df=corpus_dataframe):
     return dict
 
 
-def pie_chart(df=corpus_dataframe):
+''' def pie_chart(df=corpus_dataframe):
     pos = nb_positive_opinions(df)
     neg = nb_negative_opinions(df)
     labels = "Positive opinion proportion", "Negative opinion proportion"
@@ -78,6 +78,7 @@ def pie_chart(df=corpus_dataframe):
     )
     ax1.axis("equal")
     plt.show()
+ '''
 
 
 def histogram(df=corpus_dataframe):
@@ -172,19 +173,27 @@ if __name__ == "__main__":
     individual_miss_graph_bar("reunion", dict_miss)
 
 
-''' def seaborn_histogramm(df=corpus_dataframe):
+def seaborn_histogramm(df=corpus_miss_opinions):
     sns.set_theme(style="whitegrid")
     f, ax = plt.subplots(figsize=(6, 15))
 
     sns.set_color_codes("pastel")
-    sns.barplot(x="total", y="abbrev", data=crashes,
-                label="Total", color="b")
+    sns.barplot(x="1", y="0", data=df,
+                label="Positive", color="g")
 
     sns.set_color_codes("muted")
-    sns.barplot(x="alcohol", y="abbrev", data=crashes,
-                label="Alcohol-involved", color="b")
+    sns.barplot(x="2", y="0", data=df,
+                label="Neutral", color="orange")
 
-    ax.legend(ncol=2, loc="lower right", frameon=True)
+    sns.set_color_codes("muted")
+    sns.barplot(x="3", y="0", data=df,
+                label="Negative", color="r")
+
+    ax.legend(ncol=3, loc="lower right", frameon=True)
     ax.set(xlim=(0, 24), ylabel="",
-           xlabel="Automobile collisions per billion miles")
-    sns.despine(left=True, bottom=True) '''
+           xlabel="Number of opinions")
+    sns.despine(left=True, bottom=True)
+    plt.show()
+
+
+seaborn_histogramm()
