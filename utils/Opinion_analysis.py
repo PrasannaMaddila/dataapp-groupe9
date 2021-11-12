@@ -60,9 +60,6 @@ def misses_tweets(df=corpus_dataframe):
     return dict
 
 
-print(misses_tweets())
-
-
 def opinion_on_miss(miss, df=corpus_dataframe):
     dict_tweets = misses_tweets(df)
     tweets = dict_tweets[miss]
@@ -80,6 +77,3 @@ def opinion_on_miss(miss, df=corpus_dataframe):
     print("Percentage of positive tweets: {}%".format(pos*100/nbr_tweets))
     print("Percentage of neutral tweets: {}%".format(neu*100/nbr_tweets))
     print("Percentage of negative tweets: {}%".format(neg*100/nbr_tweets))
-
-
-opinion_on_miss('miss tahiti')
