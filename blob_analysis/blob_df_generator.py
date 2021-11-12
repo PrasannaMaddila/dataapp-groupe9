@@ -1,6 +1,7 @@
 from textblob import TextBlob
 from textblob_fr import PatternTagger, PatternAnalyzer
 import pandas as pd
+from ast import literal_eval
 
 ## This file generates the analysis of the tweets in the
 ## corpus using the pre-existing dataframe, and runs
@@ -33,4 +34,5 @@ def create_sentiment_df(df):
     return blob_dataframe
 
 
-create_sentiment_df(corpus_dataframe).to_csv("./blob_dataframe.csv")
+if __name__ == "__main__":
+    create_sentiment_df(corpus_dataframe).to_csv("./blob_dataframe.csv")
