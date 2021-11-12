@@ -177,17 +177,17 @@ def seaborn_histogramm(df=corpus_miss_opinions):
     sns.set_theme(style="whitegrid")
     f, ax = plt.subplots(figsize=(6, 15))
 
-    sns.set_color_codes("pastel")
-    sns.barplot(x="1", y="0", data=df,
-                label="Positive", color="g")
-
     sns.set_color_codes("muted")
     sns.barplot(x="2", y="0", data=df,
                 label="Neutral", color="orange")
 
+    sns.set_color_codes("pastel")
+    sns.barplot(x="1", y="0", data=df,
+                label="Positive", color="g", alpha=0.5)
+
     sns.set_color_codes("muted")
     sns.barplot(x="3", y="0", data=df,
-                label="Negative", color="r")
+                label="Negative", color="r", alpha=0.5)
 
     ax.legend(ncol=3, loc="lower right", frameon=True)
     ax.set(xlim=(0, 24), ylabel="",
