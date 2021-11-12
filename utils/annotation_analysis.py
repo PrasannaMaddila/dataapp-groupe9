@@ -1,12 +1,16 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from .corpus_statistics import nb_negative_opinions, nb_positive_opinions
+from pandas.core.frame import DataFrame
+from utils.corpus_statistics import nb_negative_opinions, nb_positive_opinions
 import numpy as np
 from difflib import *
 from pytest import *
 import json
+import seaborn as sns
+from utils.Opinion_analysis import *
 
 corpus_dataframe = pd.read_csv("./utils/corpus_dataframe.csv")
+corpus_miss_opinions = pd.read_csv("corpus miss opinions.csv")
 # corpus_dataframe = corpus_dataframe.iloc[:, 1:]
 
 # returns a dictionnay
@@ -76,7 +80,7 @@ def pie_chart(df=corpus_dataframe):
     plt.show()
 
 
-def histogram(df):
+def histogram(df=corpus_dataframe):
     """test = {
         "Ms Jean-Marie Lafayette": (99, 3),
         "Mr Jean Luc Mélenchon": (50, 50),
@@ -166,3 +170,21 @@ if __name__ == "__main__":
     individual_miss_graph_pie("reunion", dict_miss)
     """
     individual_miss_graph_bar("reunion", dict_miss)
+
+
+''' def seaborn_histogramm(df=corpus_dataframe):
+    sns.set_theme(style="whitegrid")
+    f, ax = plt.subplots(figsize=(6, 15))
+
+    sns.set_color_codes("pastel")
+    sns.barplot(x="total", y="abbrev", data=crashes,
+                label="Total", color="b")
+
+    sns.set_color_codes("muted")
+    sns.barplot(x="alcohol", y="abbrev", data=crashes,
+                label="Alcohol-involved", color="b")
+
+    ax.legend(ncol=2, loc="lower right", frameon=True)
+    ax.set(xlim=(0, 24), ylabel="",
+           xlabel="Automobile collisions per billion miles")
+    sns.despine(left=True, bottom=True) '''

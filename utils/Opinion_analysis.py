@@ -41,7 +41,8 @@ def misses_tweets(df=corpus_dataframe):
                 continue
             if words[0] == "miss":
                 close_keys = get_close_matches(
-                    topic["name"].lower()[5:], [k[5:] for k in dict.keys()], 1, 0.6
+                    topic["name"].lower()[5:], [k[5:]
+                                                for k in dict.keys()], 1, 0.6
                 )
                 if close_keys:
                     close_keys = "miss " + close_keys[0]
@@ -87,8 +88,12 @@ def miss_type_opin(df=corpus_dataframe):
     dict_type_opins = {}
     for key in dict_misses_tweets.keys():
         dict_type_opins[key] = opinion_on_miss(key, df)
-    return dict_type_opins
+    return pd.DataFrame.from_dict(dict_type_opins)
 
 
 opinion_on_miss("miss tahiti")
 print(miss_type_opin())
+
+corpus_miss_opinions = miss_type_opin()
+corpus_miss_opinions.to_csv("./corpus miss opinions.csv",
+                            )  # For repeated use later
